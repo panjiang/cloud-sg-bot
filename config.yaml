@@ -1,0 +1,36 @@
+checkInterval: 10m
+remarkPrefix: bot-local
+
+log:
+  level: info
+
+providerConfigs:
+  tencentcloud:
+    secretId: xxx
+    secretKey: xxx
+
+jobs:
+  - name: dev
+    ipSource:
+      url: http://dev.yourdomain.com:55555/
+      timeout: 5s
+    rules:
+      - TCP:22,4646
+      - UDP:53
+      - ICMP
+    targets:
+      - name: dev
+        region: ap-guangzhou
+        securityGroupId: sg-xxx1
+
+  - name: prod
+    ipSource:
+      url: http://prod.yourdomain.com:55555/
+      timeout: 5s
+    rules:
+      - TCP:22,4646,
+      - UDP:53
+    targets:
+      - name: prod
+        region: ap-guangzhou
+        securityGroupId: sg-xxx2
